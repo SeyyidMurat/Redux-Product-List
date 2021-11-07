@@ -1,6 +1,6 @@
 You can view the project at the link below.
 
-https://react-slider-1.netlify.app/
+https://redux-react-ilst.netlify.app/
 
 Technologies used in the project:
 
