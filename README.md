@@ -6,5 +6,7 @@ Technologies used in the project:
 
 1-React
 
-2- Context API
+2- Redux
+
+3-SASS
 
