@@ -1,31 +1,42 @@
-import { createSlice } from '@reduxjs/toolkit';
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	cart:[],
+	cart: [],
 };
 
-
 export const cartSlice = createSlice({
-	name: 'cart',
+	name: "cart",
 	initialState,
 	reducers: {
-		setCart(state,action){
-			const addedItem = state.cart.find((item)=>item.id === action.payload.id ? true : false);
-			const newCart = addedItem ? state.cart.map((e)=> e.id === action.payload.id ? { ...e, qty: e.qty + 1 } : e ) : [...state.cart, { qty:1, ...action.payload } ];
+		setCart(state, action) {
+			const addedItem = state.cart.find((item) => item.id === action.payload.id);
+			const newCart = addedItem
+				? state.cart.map((e) => (e.id === action.payload.id ? { ...e, qty: e.qty + 1 } : e))
+				: [...state.cart, { qty: 1, ...action.payload }];
 			state.cart = newCart;
 		},
-		setQuantity(state, action){
-			const newQuantity =state.cart.map((item)=>item.id === action.payload.id ? { ...item, qty: action.payload.target }: item);
+		setQuantity(state, action) {
+			const newQuantity = state.cart.map((item) =>
+				item.id === action.payload.id
+					? {
+							...item,
+							qty:
+								action.payload.state === "positive"
+									? item.qty + 1
+									: item.qty > 1
+									? item.qty - 1
+									: item.qty,
+					  }
+					: item
+			);
 			state.cart = newQuantity;
 		},
-		setDelete(state,action){
-			const newArray =state.cart.filter((item)=>item.id !== action.payload);
+		setDelete(state, action) {
+			const newArray = state.cart.filter((item) => item.id !== action.payload);
 			state.cart = newArray;
-		}
+		},
 	},
-
 });
 
-export const { setCart,setQuantity,setDelete } = cartSlice.actions;
+export const { setCart, setQuantity, setDelete } = cartSlice.actions;
 export default cartSlice.reducer;
