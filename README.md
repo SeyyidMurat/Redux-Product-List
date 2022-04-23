@@ -8,5 +8,7 @@ Technologies used in the project:
 
 2- Redux
 
-3-SASS
+3-Bootstrap
+
+4-Costum Hook
 
